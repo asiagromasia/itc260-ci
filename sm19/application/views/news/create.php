@@ -15,9 +15,9 @@ $this->load->view($this->config->item('theme') . 'header');
     <textarea name="text"></textarea><br />
 
     <input type="submit" name="submit" value="Create news item" />
-<?php 
-
-$this->load->view($this->config->item('theme') . 'footer');
-?>
 
 </form>
+
+<?php 
+$this->load->view($this->config->item('theme') . 'footer');
+?>

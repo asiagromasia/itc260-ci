@@ -17,7 +17,7 @@ class News_model extends CI_Model {
                 $query = $this->db->get_where('sm19_news', array('slug' => $slug));
                 return $query->row_array();
         }
-        public function set_news()
+        public function set_news() //that is our create page
         {
             $this->load->helper('url');
 
@@ -29,8 +29,12 @@ class News_model extends CI_Model {
                 'text' => $this->input->post('text')
             );
 
-            return $this->db->insert('sm19_news', $data);
+           // return $this->db->insert('sm19_news', $data);
+            if($this->db->insert('sm19_news', $data))
+            {//return slug -send to view page
+                return $slug;
+            }else{
+                return false;
+            }
         }
-
-
 }
