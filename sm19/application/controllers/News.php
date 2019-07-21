@@ -4,29 +4,40 @@ class News extends CI_Controller {
         public function __construct()
         {
                 parent::__construct();
+                $this->config->set_item('banner','News Section');
                 $this->load->model('news_model');
                 $this->load->helper('url_helper');
         }
         public function index()
-        {
+        { 
+            //following line will change in page source what is in title tag in head from //default title (key is title and data is Seattle Sports News )
+                $this->config->set_item('title','Seattle Sports News');
+                $nav1 = $this->config->item('nav1');
+           //     var_dump($nav1);
+           //     die;
                 $data['news'] = $this->news_model->get_news();
                 $data['title'] = 'News archive';
                 $this->load->view('news/index', $data);
         }
         public function view($slug = NULL)
-        {
+        {       
+            //slug without dashes from internet
+            $dashless_slug = str_replace("-", " ", $slug);
+            //uppercase slug words
+            $dashless_slug = ucwords($dashless_slug);
+            //use dashless slug for the title
+            $this->config->set_item('title','News Flash - ' . $dashless_slug);
+            
                 $data['news_item'] = $this->news_model->get_news($slug);
-   
+                
                 if (empty($data['news_item']))
                 {
                         show_404();
                 }
 
                 $data['title'] = $data['news_item']['title'];
-
-           //   $this->load->view('templates/header', $data);
                 $this->load->view('news/view', $data);
-           //   $this->load->view('templates/footer', $data);
+            
         }
         public function create()
         {
@@ -49,10 +60,10 @@ class News extends CI_Controller {
                 $slug = $this->news_model->set_news();
                 if($slug !== false){//slug sent
                     feedback('Data entered successfully!','info');
-                    redirect('news/view/'.$slug);
+                    redirect('news/view/' . $slug);
                 }else{ //error
                     feedback('Data NOT entered successfully!','error');
-                    redirect('news/create/');
+                    redirect('news/create');
                 }
              
             }

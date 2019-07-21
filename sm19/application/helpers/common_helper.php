@@ -112,3 +112,16 @@ if(!function_exists('bootswatchFeedback'))
 	} 
 
 }#end bootswatchFeedback()
+if(!function_exists('makeLinks'))
+{
+    function makeLinks($nav){
+        $myReturn = '';
+        foreach($nav as $key => $value){
+            $myReturn .= '<li><a href="' . site_url($key) . '">' . $value . '</a></li>' . PHP_EOL;
+        }
+        
+       return $myReturn;
+        //return 'is this working?';
+    }
+}//end make links
+
