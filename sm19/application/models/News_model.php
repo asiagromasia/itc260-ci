@@ -17,6 +17,7 @@ class News_model extends CI_Model {
                 $query = $this->db->get_where('sm19_news', array('slug' => $slug));
                 return $query->row_array();
         }
+    
         public function set_news() //that is our create page
         {
             $this->load->helper('url');
