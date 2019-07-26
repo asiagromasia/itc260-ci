@@ -54,6 +54,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['pics/(:any)'] = 'pics/view/$1';
 $route['pics'] = 'pics';
 
+
 //routes for our news model
 $route['news/create'] = 'news/create';
 $route['news/(:any)'] = 'news/view/$1';
